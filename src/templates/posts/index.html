@@ -1,0 +1,37 @@
+	{% extends "base.html" %}
+	{% block content %}
+	
+
+<div class="container" style="width: 100%;">
+    {% for post in posts %}
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h2 style="color: #777777;">{{post.title}}</h2>
+        <p>{{post.content|linebreaks}}</p>
+        {% if post.image %}
+          <img src="{{post.image.url}}" style="width: 250px; height: 300px;">
+        {% endif %}
+          <ul class="nav nav-pills">
+            <li role="presentation"><a href="/post/details/{{post.id}}">show details</a></li>
+            <li role="presentation"><a href="/post/{{post.id}}/update">update</a></li>
+            <li role="presentation"><a href="/post/{{post.id}}/delete">delete</a></li>
+          </ul>
+      </div>
+	{% endfor %}
+  <div class="pagination">
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page={{ posts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+      </div> 
+</div>
+	{% endblock %}

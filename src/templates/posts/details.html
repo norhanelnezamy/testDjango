@@ -1,0 +1,22 @@
+	{% extends "base.html" %}
+	{% block content %}
+
+    <div class="container" style="width: 100%;">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h2 style="color: #777777;"> {{post.title}}</h2>
+        <p> {{post.content|linebreaks}}</p>
+        <p>timestamp : {{post.timestamp|timesince}}</p>
+        <p>update : {{post.update|timesince}}</p>
+        {% if post.image %}
+          <img src="{{post.image.url}}" style="width: 330px; height: 350px;">
+        {% endif %}
+        <ul class="nav nav-pills">
+          <li role="presentation"><a href="/post/details/{{post.id}}">show details</a></li>
+          <li role="presentation"><a href="/post/{{post.id}}/update">update</a></li>
+          <li role="presentation"><a href="/post/{{post.id}}/delete">delete</a></li>
+        </ul>
+      </div>
+    </div> 
+	{% endblock %}
